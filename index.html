@@ -1,0 +1,316 @@
+    <!DOCTYPE html>
+    <html lang="fr">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Site de Terranaus</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+        <style>
+            :root {
+                /* Variables pour le thème clair */
+                --primary: #306998;
+                --secondary: #FFD43B;
+                --bg: #ffffff;
+                --sidebar-bg: #f8f9fa;
+                --text: #333333;
+                --text-secondary: #666666;
+                --border: #dee2e6;
+                --footer-bg: #f8f9fa;
+                --toggle-bg: #e9ecef;
+                --toggle-icon: #333333;
+            }
+
+            .dark-theme {
+                /* Variables pour le thème sombre */
+                --primary: #4da6ff;
+                --secondary: #ffcc00;
+                --bg: #1a1d21;
+                --sidebar-bg: #212529;
+                --text: #e9ecef;
+                --text-secondary: #adb5bd;
+                --border: #495057;
+                --card-bg: #2d3339;
+                --card-shadow: rgba(0, 0, 0, 0.2);
+                --code-bg: #343a40;
+                --footer-bg: #212529;
+                --toggle-bg: #495057;
+                --toggle-icon: #f8f9fa;
+            }
+
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+                transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+            }
+
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+                background-color: var(--bg);
+                color: var(--text);
+                display: flex;
+                min-height: 100vh;
+                line-height: 1.6;
+            }
+
+            /* Barre latérale */
+            .sidebar {
+                width: 280px;
+                background-color: var(--sidebar-bg);
+                border-right: 1px solid var(--border);
+                height: 100vh;
+                position: fixed;
+                overflow-y: auto;
+                padding: 20px 0;
+            }
+
+            .theme-toggle {
+                background: var(--toggle-bg);
+                border: none;
+                width: 40px;
+                height: 40px;
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                cursor: pointer;
+                color: var(--toggle-icon);
+            }
+
+            .sidebar-section {
+                margin-bottom: 25px;
+                padding: 0 20px;
+            }
+
+            .sidebar-section h2 {
+                font-size: 1.1rem;
+                margin-bottom: 10px;
+                color: var(--primary);
+                font-weight: 600;
+            }
+
+            .sidebar-section ul {
+                list-style: none;
+            }
+
+            .sidebar-section li {
+                margin: 6px 0;
+            }
+
+            .sidebar-section a {
+                text-decoration: none;
+                color: var(--text);
+                display: block;
+                padding: 6px 10px;
+                border-radius: 4px;
+                transition: all 0.2s;
+            }
+
+            .sidebar-section a:hover {
+                background-color: rgba(77, 166, 255, 0.1);
+                color: var(--primary);
+            }
+
+            .sidebar-section a.active {
+                background-color: rgba(77, 166, 255, 0.15);
+                color: var(--primary);
+                font-weight: 500;
+                border-left: 3px solid var(--primary);
+            }
+
+            /* Contenu principal */
+            .main-content {
+                flex: 1;
+                margin-left: 280px;
+                min-height: 100vh;
+                padding: 30px 40px;
+                max-width: 900px;
+            }
+
+            .header {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-bottom: 30px;
+                padding-bottom: 15px;
+                border-bottom: 1px solid var(--border);
+            }
+
+            .header h1 {
+                color: var(--primary);
+                font-size: 2.2rem;
+            }
+
+            /* Contenu */
+            .content-section {
+                margin-bottom: 40px;
+            }
+
+            .content-section h2 {
+                color: var(--primary);
+                margin-bottom: 20px;
+                padding-bottom: 10px;
+                border-bottom: 1px solid var(--border);
+                font-size: 1.8rem;
+            }
+
+            .content-section h3 {
+                color: var(--text);
+                margin: 25px 0 15px;
+                font-size: 1.4rem;
+            }
+
+            .content-section p {
+                margin-bottom: 15px;
+                color: var(--text);
+            }
+
+            .content-section ul, .content-section ol {
+                margin: 15px 0 15px 30px;
+            }
+
+            .content-section li {
+                margin-bottom: 8px;
+                color: var(--text);
+            }
+
+            /* Pied de page */
+            .footer {
+                margin-top: 50px;
+                padding: 20px;
+                border-top: 1px solid var(--border);
+                color: var(--text-secondary);
+                font-size: 0.9rem;
+                text-align: center;
+                background-color: var(--footer-bg);
+                border-radius: 8px;
+            }
+
+            /* Responsive */
+            @media (max-width: 900px) {
+                .sidebar {
+                    width: 250px;
+                }
+                
+                .main-content {
+                    margin-left: 250px;
+                    padding: 20px;
+                }
+                
+                .header {
+                    flex-direction: column;
+                    align-items: flex-start;
+                    gap: 15px;
+                }
+            }
+                
+            @media (max-width: 768px) {
+                body {
+                    flex-direction: column;
+                }
+                
+                .sidebar {
+                    position: relative;
+                    width: 100%;
+                    height: auto;
+                    max-height: 60vh;
+                }
+                
+                .main-content {
+                    margin-left: 0;
+                }
+            }
+        </style>
+    </head>
+
+    <body>
+        <div class="sidebar">
+            <div class="sidebar-section">
+                <h2>Sections du site</h2>
+                <ul>
+                    <li><a href="https://wifi-lcdg.github.io/unblock-wifi/index.html" class="active">Accueil</a></li>
+                    <li><a href="https://wifi-lcdg.github.io/unblock-wifi/changes.html">Changements</a></li>
+                </ul>
+            </div>
+        </div>
+
+
+        <div class="main-content">
+            <div class="header">
+                <h1>Unblock wifi lcdg</h1>
+                <button class="theme-toggle" id="themeToggle">
+                    <i class="fas fa-moon" id="themeIcon"></i>
+                </button>
+            </div>
+
+
+            <div class="content-section">
+                <h2>Comment utiliser le logiciel et informations utiles</h2>
+                
+                <h3>Liste de blocage</h3>
+                <p>Le logiciel utilise une liste pour n'intervenir que sur les sites bloqués sur le réseau. Vous pouvez retrouver cette liste dans le fichier blacklist.txt. La liste peut être mise à jour en exécutant le fichier update_blacklist_file.cmd. Chaque mise à jour de la liste est annoncée sur ce Instagram : <a href="https://www.instagram.com/wifi_lcdg52">https://www.instagram.com/wifi_lcdg52</a></p>
+                
+                <h3>Lancer le logiciel</h3>
+                <p>Pour démarrer le logiciel, il suffit de lancer start.cmd et d'autoriser les droits d'administrateur.</p>
+
+                <h3>Signaler un problème</h3>
+                <p>Pour signaler un problème, ça se passe sur Instagram (<a href="https://www.instagram.com/wifi_lcdg52">https://www.instagram.com/wifi_lcdg52</a>)</p>
+                <p>Ce qui est considéré comme un problème est : un site non débloqué sur la connexion du lycée et un problème avec le logiciel.</p>
+
+                <h3>Informations complémentaires</h3>
+                <p>Le logiciel utilisé est <a href="https://github.com/ValdikSS/GoodbyeDPI">GoodbyeDPI</a> en version <a href="https://github.com/ValdikSS/GoodbyeDPI/releases/tag/0.2.3rc3">0.2.3rc3</a>. Ce que vous téléchargez est juste une version du logiciel optimisé pour bypass les sites bloqués par la connexion du lycée. Important à savoir, actuellement les sites consultés sont visibles. Un professeur équipé des bons logiciels peut voir tous les sites auxquelles vous accédez.</p>
+            </div>
+            
+            <div class="footer">
+                <p>Dernière mise à jour : ??/??/2026</p>
+                <p>Repository du site : <a href="https://github.com/wifi-lcdg/unblock-wifi">https://github.com/wifi-lcdg/unblock-wifi</a></p>
+            </div>
+        </div>
+        
+        <!-- Indicateur de thème -->
+        <div class="theme-indicator">
+            <span id="themeStatus"></span>
+        </div>
+
+        <script>
+            // Sélection des éléments
+            const themeToggle = document.getElementById('themeToggle');
+            const themeIcon = document.getElementById('themeIcon');
+            const body = document.body;
+            const themeStatus = document.getElementById('themeStatus');
+            
+            // Vérifier le thème stocké dans localStorage
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme === 'dark-theme') {
+                enableDarkTheme();
+            } else {
+                enableLightTheme();
+            }
+            
+            // Fonction pour activer le thème sombre
+            function enableDarkTheme() {
+                body.classList.add('dark-theme');
+                themeIcon.className = 'fas fa-sun';
+                themeStatus.textContent = '';
+                localStorage.setItem('theme', 'dark-theme');
+            }
+            
+            // Fonction pour activer le thème clair
+            function enableLightTheme() {
+                body.classList.remove('dark-theme');
+                themeIcon.className = 'fas fa-moon';
+                themeStatus.textContent = '';
+                localStorage.setItem('theme', 'light-theme');
+            }
+            
+            // Gestionnaire d'événement pour le bouton de bascule
+            themeToggle.addEventListener('click', () => {
+                if (body.classList.contains('dark-theme')) {
+                    enableLightTheme();
+                } else {
+                    enableDarkTheme();
+                }
+            });
+        </script>
+    </body>
+    </html>
